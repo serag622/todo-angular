@@ -7,6 +7,11 @@ export interface Task {
     isComblete : boolean
 }
 
+export interface TaskFilters {
+    name : string | null;
+    priority : string | null
+    isComblete : boolean | null
+}
 
 export const priorities = [
     'Low' , 'medium' , 'High'

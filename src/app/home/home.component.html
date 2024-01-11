@@ -1,8 +1,9 @@
-<div class="container pt-3">
+<div class="container pt-3 px-3">
 
   <div class="bg-light py-3 rounded my-3 shadow">
     <div class="d-flex  px-3">
-      <button class="btn btn-primary btn-sm rounded-btn rounded-circle p-2 mx-1 shadow ">
+      <button class="btn btn-primary btn-sm rounded-btn rounded-circle p-2 mx-1 shadow " ngbTooltip="Advanced Filters"
+        (click)="isToggled = !isToggled">
         <app-feather-icons [icon]="'filter'"></app-feather-icons>
       </button>
 
@@ -13,9 +14,46 @@
     </div>
   </div>
 
+
+  <div [ngStyle]="{'max-height': (isToggled) ? '300px' : '0px' , 'overflow': (isToggled) ? 'hidden' : 'hidden' } "
+    style="transition: all .9s ease-in-out; overflow: hidden;">
+
+    <div class="row align-items-center py-3 px-4 ">
+
+      <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+        <label  class="form-label">Task Name</label>
+        <input type="text"  [(ngModel)]="filters.name" class="form-control">
+      </div>
+
+      <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+        <label class="form-label">Priority</label>
+        <select class="form-select" [(ngModel)]="filters.priority" >
+          @for (p of priorities; track $index) {
+          <option [value]="p">{{p}}</option>
+          }
+        </select>
+      </div>
+
+      <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+        <label class="form-label">Task Status</label>
+        <select class="form-select" [(ngModel)]="filters.isComblete" >
+          <option [value]="false">Not Done</option>
+          <option [value]="true">Done</option>
+        </select>
+      </div>
+
+
+      <div class="col d-flex h-50 justify-content-end align-items-end mt-1">
+        <button class="btn btn-primary mx-1" (click)="Search()" >Search</button>
+        <button class="mx-1 btn btn-danger" (click)="reset()">Rest</button>
+      </div>
+    </div>
+  </div>
+
+
   <div class="row pt-3">
     <div class="col-12">
-      <table class="table table-bordered table-striped table-sm">
+      <table class="table table-bordered table-striped text-center table-sm">
         <thead>
           <tr>
             <th><strong>#</strong></th>
@@ -38,10 +76,11 @@
                 [classList]="task.isComblete ? 'text-success' : 'text-danger'"></app-feather-icons>
             </td>
             <td class="text-center">
-              <button class="btn btn-success btn-sm rounded-btn mx-1 rounded-4" (click)="openCompleteConfirmMsg(task.id)" *ngIf="!task?.isComblete">
+              <button class="btn btn-success btn-sm rounded-btn mx-1 rounded-4"
+                (click)="openCompleteConfirmMsg(task.id)" *ngIf="!task?.isComblete">
                 <app-feather-icons [icon]="'check-circle'"></app-feather-icons>
               </button>
-              <button class="btn btn-danger btn-sm rounded-btn rounded-4 " (click)="openDeleteConfirmMsg(task.id)" >
+              <button class="btn btn-danger btn-sm rounded-btn rounded-4 " (click)="openDeleteConfirmMsg(task.id)">
                 <app-feather-icons [icon]="'trash-2'"></app-feather-icons>
               </button>
             </td>

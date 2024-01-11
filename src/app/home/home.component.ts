@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 import { Subject, Subscription, takeUntil, timer } from 'rxjs';
 import { SharedModule } from '../shared/shared.module';
-import { Task, priorities } from '../shared/model/task.model';
+import { Task, TaskFilters, priorities } from '../shared/model/task.model';
 import { TaskService } from '../shared/service/task.service';
 import Swal from 'sweetalert2';
 
@@ -41,6 +41,8 @@ export class HomeComponent implements OnInit {
 
   priorities : string[] = priorities
 
+  filters : TaskFilters = {name : null , priority : null , isComblete : null}
+
   constructor(private fb: UntypedFormBuilder, config: NgbModalConfig,private taskServise : TaskService) {
     config.backdrop = 'static';
     config.keyboard = false;
@@ -52,6 +54,19 @@ export class HomeComponent implements OnInit {
 
   getTaskList(){
     this.TaskList = this.taskServise.getTaskList()
+  }
+
+
+  Search(){
+    this.TaskList = this.taskServise.getTaskList()
+     this.TaskList = this.TaskList.filter((t)=> 
+       t.name == this.filters.name || t.isComblete == this.filters.isComblete || t.priority == this.filters.priority
+     )
+  }
+
+  reset(){
+    this.filters = {name : null , priority : null , isComblete : null};
+    this.getTaskList()
   }
 
   createForm(): UntypedFormGroup {
