@@ -51,7 +51,7 @@
       </div>
 
 
-      <div class="col d-flex h-50 justify-content-end align-items-end mt-1">
+      <div class="col d-flex h-50 justify-content-end align-items-end m-2 ">
         <button class="btn btn-primary mx-1" (click)="Search()" >Search</button>
         <button class="mx-1 btn btn-danger" (click)="reset()">Rest</button>
       </div>
@@ -108,7 +108,8 @@
 
 <ng-template #AddTask let-d="dismiss">
 
-  <div class="d-flex justify-content-end p-2">
+  <div class="d-flex justify-content-between p-2">
+    <h4>New Task</h4>
     <button type="button" class="btn-close " aria-label="Close" (click)="close()"></button>
   </div>
   <div class="modal-body">
@@ -117,7 +118,7 @@
 
       <div class="row mt-4">
 
-        <div class="mb-3 col-6">
+        <div class="mb-3 col-lg-6 col-md-12 ">
           <label for="validationCustom01" class="form-label">Task Name</label>
           <input type="text" formControlName="name" id="validationCustom01" class="form-control"
             [ngClass]="{ 'input-invalid' : Form.get('name')?.hasError('required') && isSubmit }">
@@ -129,7 +130,7 @@
         </div>
 
 
-        <div class="mb-3 col-6">
+        <div class="mb-3 col-lg-6 col-md-12">
           <label class="form-label">Priority</label>
           <select class="form-select" formControlName="priority"
             [ngClass]="{ 'input-invalid' : Form.get('priority')?.hasError('required') && isSubmit }">
@@ -145,7 +146,7 @@
         </div>
 
 
-        <div class="mb-3 col-6">
+        <div class="mb-3 col-lg-6 col-md-12">
           <label for="validationCustom02" class="form-label">Task Due Date</label>
           <input type="date" formControlName="date" id="validationCustom02" class="form-control"
             [ngClass]="{ 'input-invalid' : Form.get('date')?.hasError('required') && isSubmit }">
@@ -156,7 +157,7 @@
           }
         </div>
 
-        <div class="mb-3 col-6">
+        <div class="mb-3 col-lg-6 col-md-12">
           <label for="validationCustom01" class="form-label">Task Discription</label>
           <input type="text" formControlName="description" id="validationCustom01" class="form-control"
             [ngClass]="{ 'input-invalid' : Form.get('description')?.hasError('required') && isSubmit }">
