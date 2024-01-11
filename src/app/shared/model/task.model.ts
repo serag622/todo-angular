@@ -4,6 +4,7 @@ export interface Task {
     description : string;
     date : string;
     priority : string;
+    priorityId : number 
     isComblete : boolean
 }
 

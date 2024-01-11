@@ -1,6 +1,6 @@
 <div class="container pt-3 px-3">
 
-  <div class="bg-light py-3 rounded my-3 shadow">
+  <div class="bg-light d-flex justify-content-between border py-3 px-2 rounded my-3 shadow">
     <div class="d-flex  px-3">
       <button class="btn btn-primary btn-sm rounded-btn rounded-circle p-2 mx-1 shadow " ngbTooltip="Advanced Filters"
         (click)="isToggled = !isToggled">
@@ -11,6 +11,14 @@
         <app-feather-icons [icon]="'plus'"></app-feather-icons>
       </button>
 
+    </div>
+
+    <div>
+      <select placeholder="Sort" class="form-select"  (change)="Sort($event)" >
+        <option [value]="0">No Sort</option>
+        <option [value]="1">Low - Hight</option>
+        <option [value]="2">Hight - Low</option>                
+      </select>
     </div>
   </div>
 

@@ -69,12 +69,26 @@ export class HomeComponent implements OnInit {
     this.getTaskList()
   }
 
+
+  Sort($event : any){
+    let val =  $event.target.value
+    if(val == 0){
+      this.getTaskList()
+    }
+    else if(val == 1){
+      this.TaskList = this.TaskList.sort((a , b)=> a.priorityId - b.priorityId)
+    }else if(val == 2){
+      this.TaskList = this.TaskList.sort((a , b)=> b.priorityId - a.priorityId)
+    }
+  }
+
   createForm(): UntypedFormGroup {
     return this.fb.group({
       name : ['', Validators.required] ,
       description : ['',Validators.required] ,
       date : ['' ,Validators.required] ,
       priority : ['' ,Validators.required] ,
+      priorityId : [] ,
       isComblete : [false]
     });
   }
@@ -109,6 +123,12 @@ export class HomeComponent implements OnInit {
         }
       });
     } else {
+
+      let p : string = this.Form.controls['priority'].value;
+      let pId : number = p == 'Low' ? 1 : p == 'medium' ? 2: 3
+
+      this.Form.controls['priorityId'].setValue(pId)
+
       this.taskServise.addTask(this.Form.getRawValue())
       this.close()
     }
