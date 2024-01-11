@@ -32,7 +32,7 @@ export class TaskService {
    
     deleteTask(id : number){
         let index = this.TaskList.findIndex((t)=> t.id == id)
-        this.TaskList = this.TaskList.splice(index, 1)
+        this.TaskList.splice(index, 1)
         localStorage.setItem('list', JSON.stringify(this.TaskList))
     }
 

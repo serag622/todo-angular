@@ -38,10 +38,10 @@
                 [classList]="task.isComblete ? 'text-success' : 'text-danger'"></app-feather-icons>
             </td>
             <td class="text-center">
-              <button class="btn btn-success btn-sm rounded-btn mx-1 rounded-4" *ngIf="!task?.isComblete">
+              <button class="btn btn-success btn-sm rounded-btn mx-1 rounded-4" (click)="openCompleteConfirmMsg(task.id)" *ngIf="!task?.isComblete">
                 <app-feather-icons [icon]="'check-circle'"></app-feather-icons>
               </button>
-              <button class="btn btn-danger btn-sm rounded-btn rounded-4 ">
+              <button class="btn btn-danger btn-sm rounded-btn rounded-4 " (click)="openDeleteConfirmMsg(task.id)" >
                 <app-feather-icons [icon]="'trash-2'"></app-feather-icons>
               </button>
             </td>
@@ -49,7 +49,7 @@
           }
           @if (!TaskList.length) {
           <tr>
-            <td colspan="5" rowspan="5" class="text-center"> There is no tasks </td>
+            <td colspan="6" rowspan="6" class="text-center"> There is no tasks </td>
           </tr>
           }
         </tbody>
@@ -61,7 +61,7 @@
 
 <ng-template #AddTask let-d="dismiss">
 
-  <div class="p-2">
+  <div class="d-flex justify-content-end p-2">
     <button type="button" class="btn-close " aria-label="Close" (click)="close()"></button>
   </div>
   <div class="modal-body">
@@ -123,7 +123,7 @@
       </div>
 
       <div class="d-flex justify-content-end">
-        <button (click)="submit()" type="submit" class="btn submit-btn p-2 text-white fw-bold">
+        <button (click)="submit()" type="submit" class="btn btn-success submit-btn p-2 text-white fw-bold">
           Add Task
           <app-feather-icons [icon]="'arrow-right'" [class]="'ms-3'"></app-feather-icons>
         </button>

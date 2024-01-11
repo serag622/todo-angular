@@ -14,6 +14,7 @@ import { Subject, Subscription, takeUntil, timer } from 'rxjs';
 import { SharedModule } from '../shared/shared.module';
 import { Task, priorities } from '../shared/model/task.model';
 import { TaskService } from '../shared/service/task.service';
+import Swal from 'sweetalert2';
 
 
 
@@ -98,6 +99,49 @@ export class HomeComponent implements OnInit {
     }
   }
 
+
+  openDeleteConfirmMsg(id : number){
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'You want to delete this task!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'No, keep it'
+    }).then((result) => {
+      if (result.value) {
+        this.taskServise.deleteTask(id)
+        this.getTaskList()
+        Swal.fire(
+          'Deleted!',
+          'Your task has been deleted.',
+          'success'
+        )
+      }
+    })
+  }
+
+
+  openCompleteConfirmMsg(id : number){
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'You want to change this task status!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes',
+      cancelButtonText: 'Cancel'
+    }).then((result) => {
+      if (result.value) {
+        this.taskServise.updateTaskStatus(id)
+        this.getTaskList()
+        Swal.fire(
+          'Done!',
+          'Your task status is done.',
+          'success'
+        )
+      }
+    })
+  }
 
 
 }
